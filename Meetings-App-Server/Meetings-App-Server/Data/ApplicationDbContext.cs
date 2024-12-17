@@ -4,17 +4,17 @@ using Microsoft.EntityFrameworkCore;
 using Meetings_App_Server.Models.Domains;
 using System.Reflection.Emit;
 using Meetings_App_Server.Models;
-using Meetings_app_server.Models.Domain;
+using Meetings_App_Server.Models.Domains;
 namespace Meetings_App_Server.Data;
 
-public class ApplicationDbContext : IdentityDbContext
+public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 
 
 {
 
     public DbSet<Meeting> Meetings { get; set; }
 
-    // public DbSet<Attendee> Attendee { get; set; }
+    public DbSet<Attendee> Attendee { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
 
@@ -31,6 +31,19 @@ public class ApplicationDbContext : IdentityDbContext
         var readerRoleId = "a71a55d6-99d7-4123-b4e0-1218ecb90e3e";
 
         var writerRoleId = "c309fa92-2123-47be-b397-a1c77adb502c";
+
+        builder.Entity<Attendee>()
+            .HasKey(a => new { a.MeetingId, a.UserId });  // Composite key
+
+        builder.Entity<Attendee>()
+            .HasOne(a => a.Meeting)
+            .WithMany(m => m.Attendees)
+            .HasForeignKey(a => a.MeetingId);
+
+        builder.Entity<Attendee>()
+            .HasOne(a => a.User)
+            .WithMany() // One user can attend many meetings
+            .HasForeignKey(a => a.UserId);
 
         var meetings = new List<Meeting>
 

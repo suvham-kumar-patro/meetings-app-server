@@ -1,5 +1,57 @@
 [
   {
+    "ContainingType": "Meetings_App_Server.Controllers.AttendeeController",
+    "Method": "AddAttendee",
+    "RelativePath": "api/Attendee/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Meetings_App_Server.Models.DTO.AddAttendeeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Meetings_App_Server.Controllers.AttendeeController",
+    "Method": "RemoveAttendee",
+    "RelativePath": "api/Attendee/Remove",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Meetings_App_Server.Models.DTO.RemoveAttendeeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Meetings_App_Server.Controllers.AttendeeController",
+    "Method": "GetUsers",
+    "RelativePath": "api/Attendee/users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Meetings_App_Server.Models.DTO.UserWithMeetingsDto, Meetings-App-Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Meetings_App_Server.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/Auth/Login",
@@ -41,7 +93,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Meetings_app_server.Models.Domain.Meeting, Meetings-App-Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Meetings_App_Server.Models.Domains.Meeting, Meetings-App-Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -67,7 +119,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Meetings_app_server.Models.Domain.Meeting",
+        "Type": "Meetings_App_Server.Models.Domains.Meeting",
         "MediaTypes": [
           "text/plain",
           "application/json",

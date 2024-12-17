@@ -1,17 +1,15 @@
-﻿//namespace Meetings_App_Server.Models.DTO;
+﻿namespace Meetings_App_Server.Models.DTO;
 
-//using Meetings_App_Server.Models.Domains;
-//using System.Collections.Generic;
+using Meetings_App_Server.Models.Domains;
+using System.Collections.Generic;
 
-//    public class Meeting
-//    {
-//    public int Id { get; set; }  // Primary Key
-//    public string Name { get; set; }
-//    public string Description { get; set; }
-//    public DateTime Date { get; set; }
-//    public TimeOnly StartTime { get; set; }
-//    public TimeOnly EndTime { get; set; }
-
-
-//    public ICollection<Attendee> Attendees { get; set; }
-//}
+public class MeetingDto
+{
+    public int Id { get; set; }  // Primary Key
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public DateTime Date { get; set; }
+    public TimeOnly StartTime { get; set; }
+    public TimeOnly EndTime { get; set; }
+    public ICollection<Attendee> Attendees { get; set; }
+}

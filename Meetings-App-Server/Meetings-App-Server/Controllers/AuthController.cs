@@ -1,15 +1,10 @@
 ﻿using Meetings_App_Server.Models.DTO;
-
 using Microsoft.AspNetCore.Identity;
-
 using Microsoft.AspNetCore.Mvc;
-
 using Meetings_App_Server.Repositories;
-
 namespace Meetings_App_Server.Controllers;
 
 [Route("api/[controller]")]
-
 [ApiController]
 
 public class AuthController : ControllerBase

@@ -1,23 +1,13 @@
 using Meetings_App_Server.Repositories;
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-
 using Microsoft.AspNetCore.Identity;
-
 using Microsoft.EntityFrameworkCore;
-
 using Microsoft.IdentityModel.Tokens;
-
 using Microsoft.OpenApi.Models;
-
 using System.Text;
-
 using Meetings_App_Server.Data;
-
 using System.Text.Json.Serialization;
-
 using System.Text.Json;
-
 using Meetings_App_Server.CustomConverter;
 
 
@@ -182,6 +172,18 @@ builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigins",
+        policy =>
+        {
+            //policy.WithOrigins(new string[] { "http://localhost:4200" }) // Replace with your allowed origin(s)
+            policy.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
 
 // Configure middleware and routing
@@ -195,6 +197,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 
 }
+
+app.UseCors("AllowSpecificOrigins");
 
 app.UseHttpsRedirection();
 

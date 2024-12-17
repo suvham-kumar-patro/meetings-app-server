@@ -1,5 +1,7 @@
-﻿using Meetings_App_Server.CustomConverter;
-namespace Meetings_app_server.Models.Domain
+﻿using Meetings_App_Server.Models.DataAnnotations;
+using Meetings_App_Server.CustomConverter;
+using Meetings_App_Server.Models.Domains;
+namespace Meetings_App_Server.Models.Domains
 {
     public class Meeting
     {
@@ -9,7 +11,9 @@ namespace Meetings_app_server.Models.Domain
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public TimeOnly StartTime { get; set; }
+        [StartTimeBeforeEndTime]
         public TimeOnly EndTime { get; set; }
+        public ICollection<Attendee> Attendees { get; set; }
 
     }
 

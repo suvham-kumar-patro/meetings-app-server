@@ -1,5 +1,7 @@
 ﻿using Meetings_App_Server.Data;
 
+using Meetings_App_Server.Data;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Meetings_App_Server.Models;
@@ -7,9 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 using Meetings_App_Server.Models.DTO;
 using Meetings_App_Server.Models.Domains;
-using Meetings_app_server.Models.Domain;
 
 namespace Meetings_App_Server.Controllers;
+
 
 
 
