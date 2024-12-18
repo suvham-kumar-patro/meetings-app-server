@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using AutoMapper;
 using Meetings_App_Server.Data;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using Meetings_App_Server.CustomConverter;
+using Meetings_App_Server.Mappings;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,17 +39,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
 
         AuthenticationType = "Jwt",
-
         ValidateIssuer = true,
-
         ValidateAudience = true,
-
         ValidateLifetime = true,
-
         ValidateIssuerSigningKey = true,
-
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
-
         ValidAudience = builder.Configuration["Jwt:Audience"],
 
         // or try this if the above does not work
@@ -90,15 +86,10 @@ builder.Services.Configure<IdentityOptions>(options =>
 {
 
     options.Password.RequireDigit = true;
-
     options.Password.RequireLowercase = true;
-
     options.Password.RequireNonAlphanumeric = false;
-
     options.Password.RequireUppercase = true;
-
     options.Password.RequiredLength = 5;
-
     options.Password.RequiredUniqueChars = 1;
 
 });
@@ -115,17 +106,13 @@ builder.Services.AddSwaggerGen(options =>
 {
 
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "meetings-app-server", Version = "v1" });
-
     options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
 
     {
 
         Name = "Authorization",
-
         In = ParameterLocation.Header,
-
         Type = SecuritySchemeType.ApiKey,
-
         Scheme = JwtBearerDefaults.AuthenticationScheme
 
     });
@@ -177,12 +164,14 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowSpecificOrigins",
         policy =>
         {
-            //policy.WithOrigins(new string[] { "http://localhost:4200" }) // Replace with your allowed origin(s)
-            policy.AllowAnyOrigin()
-                .AllowAnyHeader()
-                .AllowAnyMethod();
+            policy.WithOrigins(new string[] { "http://localhost:4200" }) // Replace with your allowed origin(s)
+                                                                         //policy.AllowAnyOrigin()
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
         });
 });
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 var app = builder.Build();
 
