@@ -20,7 +20,7 @@ namespace Meetings_App_Server.Models.DTO
 
         [DataType(DataType.Time)]
         public TimeOnly EndTime { get; set; }  // TimeOnly for end time
-        public List<string> Attendees { get; set; }
+        public List<string> Emails { get; set; }
 
     }
 }

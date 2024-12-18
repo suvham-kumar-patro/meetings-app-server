@@ -60,7 +60,7 @@ public class JwtTokenRepository : ITokenRepository
 
             claims,
 
-            expires: DateTime.Now.AddMinutes(15),
+            expires: DateTime.Now.AddDays(7),
 
             signingCredentials: credentials);
 

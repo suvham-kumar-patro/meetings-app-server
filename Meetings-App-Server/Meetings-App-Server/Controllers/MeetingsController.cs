@@ -82,6 +82,7 @@ public class MeetingsController : ControllerBase
 
         }
 
+        var Emails = addMeetingRequest.Emails;
         // Create the Meeting model based on the received DTO data
 
         var meeting = new Meeting
@@ -101,9 +102,9 @@ public class MeetingsController : ControllerBase
             Attendees = new List<Attendee>(),
         };
 
-        if (addMeetingRequest.Attendees != null && addMeetingRequest.Attendees.Any())
+        if (addMeetingRequest.Emails != null && addMeetingRequest.Emails.Any())
         {
-            foreach (var email in addMeetingRequest.Attendees)
+            foreach (var email in addMeetingRequest.Emails)
             {
                 var user = await _userManager.FindByEmailAsync(email);
                 if (user != null)
