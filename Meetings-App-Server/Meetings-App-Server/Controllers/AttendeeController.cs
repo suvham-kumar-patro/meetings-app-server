@@ -6,6 +6,7 @@ using Meetings_App_Server.Models.DTO;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
 
 namespace Meetings_App_Server.Controllers
 {
@@ -16,11 +17,13 @@ namespace Meetings_App_Server.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IMapper _mapper;
 
-        public AttendeeController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public AttendeeController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IMapper mapper)
         {
             _context = context;
             _userManager = userManager;
+            _mapper = mapper;
         }
 
 
@@ -50,6 +53,7 @@ namespace Meetings_App_Server.Controllers
         {
             // Get the current logged-in user's ID from the JWT token
             var user = await _userManager.GetUserAsync(User);
+            Console.WriteLine(user);
             var userId = user.Id;
 
             // Check if the user is authenticated
@@ -101,7 +105,9 @@ namespace Meetings_App_Server.Controllers
             _context.Attendee.Add(newAttendee);
             await _context.SaveChangesAsync();
 
-            return Ok("Attendee added successfully.");
+            var meetingDto = _mapper.Map<MeetingDto>(meeting);
+            return Ok(meetingDto);
+
         }
 
         [HttpDelete("Remove")]
