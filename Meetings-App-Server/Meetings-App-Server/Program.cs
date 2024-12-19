@@ -60,7 +60,7 @@ builder.Services.AddIdentityCore<IdentityUser>()
 
     .AddRoles<IdentityRole>()
 
-    .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("AscendionAPI")
+    .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("Meetings-App-Server")
 
     .AddEntityFrameworkStores<ApplicationDbContext>()
 

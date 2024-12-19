@@ -29,7 +29,7 @@ public class JwtTokenRepository : ITokenRepository
     }
 
 
-    public string CreateJWTToken(IdentityUser user, List<string> roles)
+    public string CreateJWTToken(IdentityUser user, IList<string> roles)
 
     {
 

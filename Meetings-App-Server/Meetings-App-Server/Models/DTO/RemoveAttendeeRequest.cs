@@ -3,5 +3,4 @@
 public class RemoveAttendeeRequest
 {
     public int MeetingId { get; set; }
-    public string UserId { get; set; }
 }

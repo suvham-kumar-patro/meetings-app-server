@@ -55,21 +55,15 @@ public class AuthController : ControllerBase
 
             // Add roles to this User
 
-            if (registerRequestDto.Roles != null && registerRequestDto.Roles.Any())
-
-            {
-
-                identityResult = await userManager.AddToRolesAsync(identityUser, registerRequestDto.Roles);
+                identityResult = await userManager.AddToRolesAsync(identityUser, new string[] { "Reader", "Writer" });
 
                 if (identityResult.Succeeded)
 
                 {
 
-                    return Ok("User was registered! Please login.");
+                    return NoContent();
 
                 }
-
-            }
 
         }
 
@@ -99,7 +93,7 @@ public class AuthController : ControllerBase
 
             {
 
-                // Get Roles for this user
+                //// Get Roles for this user
 
                 var roles = await userManager.GetRolesAsync(user);
 
@@ -109,7 +103,7 @@ public class AuthController : ControllerBase
 
                     // Create Token
 
-                    var authToken = tokenRepository.CreateJWTToken(user, roles.ToList());
+                    var authToken = tokenRepository.CreateJWTToken(user, roles);
 
                     var response = new LoginResponseDto
 
@@ -119,7 +113,7 @@ public class AuthController : ControllerBase
 
                         Email = user.Email,
 
-                        Role = roles[0]
+                        //Role = roles[0]
 
                     };
 
