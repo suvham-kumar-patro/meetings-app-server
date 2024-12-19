@@ -135,7 +135,7 @@ namespace Meetings_App_Server.Controllers
             _context.Attendee.Remove(attendee);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Attendee removed successfully");
         }
     }
 }
